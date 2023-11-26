@@ -14,42 +14,9 @@ import (
 	fmt "fmt"
 )
 
-// CLASS TYPES
+// CLASS NAMESPACE
 
-// Extended Types
-
-// This extended class type extends the primitive Go <primitiveType> data type
-// whose value can be accessed and manipulated by the methods that implement one
-// or more abstract interfaces.
-type <className>_ <primitiveType>
-...
-
-// Encapsulated Types
-
-// This encapsulated class type defines a set of primitive attributes that can
-// be accessed and manipulated by the methods that implement one or more
-// abstract interfaces.
-type <className>_ struct {
-	<privateAttributeName> <AbstractType>
-	...
-}
-...
-
-// CLASS METHODS
-
-// <InterfaceName> Interface
-
-// This method returns...
-func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
-	var <result> <AbstractType>
-	...
-	return <result>
-}
-...
-
-// CLASS NAMESPACES
-
-// This namespace class type defines the structure associated with the class
+// This class namespace type defines the structure associated with the class
 // constants, constructors and functions for the <className> class.
 type <className>Class_ struct {
 	<classConstantName> <AbstractType>
@@ -80,6 +47,37 @@ func (c *<className>Class_) From<AbstractType>(value <AbstractType>) <ClassName>
 
 // This function returns...
 func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
+	var <result> <AbstractType>
+	...
+	return <result>
+}
+...
+
+// CLASS ATTRIBUTES
+
+// Extended Attributes
+
+// This type definition creates a single attribute that can only be accessed
+// and manipulated by the methods that implement its abstract interfaces.
+type <className>_ <primitiveType>
+...
+
+// Encapsulated Attributes
+
+// This type definition creates a set of attributes that can only be accessed
+// and manipulated by the methods that implement its abstract interfaces.
+type <className>_ struct {
+	<privateAttributeName> <AbstractType>
+	...
+}
+...
+
+// CLASS METHODS
+
+// <InterfaceName> Interface
+
+// This method returns...
+func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
