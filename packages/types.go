@@ -14,3 +14,9 @@ type <StructureName> struct {
 	...
 }
 ...
+
+// Function Types
+
+// This function type defines the signature for a <FunctionName> function.
+type <FunctionName>Function func(<arguments>) <ResultType>
+...
