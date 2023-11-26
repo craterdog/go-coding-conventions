@@ -1,0 +1,13 @@
+// PACKAGE CONSTANTS
+
+// Public Constants
+
+// This constant represents...
+const <PackageConstantName> = <packageConstantValue>
+...
+
+// Private Constants
+
+// This private constant represents...
+const <privatePackageConstantName> = <privatePackageConstantValue>
+...
