@@ -46,16 +46,24 @@ type <StructureName> struct {
 // Public Constants
 
 // This constant represents...
-const <ConstantName> = <ConstantValue>
+const <PackageConstantName> = <packageConstantValue>
 ...
 
 // Private Constants
 
 // This private constant represents...
-const <privateConstantName> = <PrivateConstantValue>
+const <privatePackageConstantName> = <privatePackageConstantValue>
 ...
 
 // PACKAGE ABSTRACTIONS
+
+// Abstract Interfaces
+
+type <InterfaceName> interface {
+	<MethodName>(<arguments>) <ResultType>
+	...
+}
+...
 
 // Abstract Types
 
@@ -67,32 +75,11 @@ type <TypeName>Like interface {
 }
 ...
 
-// Abstract Interfaces
-
-type <InterfaceName> interface {
-	<MethodName>(<arguments>) <ResultType>
-	...
-}
-...
-
 // PACKAGE CLASSES
 
-// Primitive Classes
-
-// This singleton defines a unique name space for the <ClassName> primitive
-// class.
-var <ClassName> = &<className>s_{
-	<className>_(...), // This is a class constant.
-	...
-}
-...
-
-// Structured Classes
-
-// This singleton defines a unique name space for the <ClassName> structured
-// class.
-var <ClassName> = &<className>s_{
-	<className>_(...), // This is a class constant.
+// This singleton exports a unique namespace for the <className> class type.
+var <ClassName> = &<className>Class_{
+	<className>_(...), // Initialize the class constant <privateClassConstantName>.
 	...
 }
 ...
@@ -102,7 +89,7 @@ var <ClassName> = &<className>s_{
 // Public Functions
 
 // This function returns...
-func <FunctionName>(<arguments>) <ResultType> {
+func <PackageFunctionName>(<arguments>) <ResultType> {
 	var <result> <ResultType>
 	...
 	return <result>
@@ -112,7 +99,7 @@ func <FunctionName>(<arguments>) <ResultType> {
 // Private Functions
 
 // This private function returns...
-func <privateFunctionName>(<arguments>) <ResultType> {
+func <privatePackageFunctionName>(<arguments>) <ResultType> {
 	var <result> <ResultType>
 	...
 	return <result>
