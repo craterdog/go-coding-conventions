@@ -3,8 +3,8 @@
 // Public Functions
 
 // This function returns...
-func <PackageFunctionName>(<arguments>) <ResultType> {
-	var <result> <ResultType>
+func <PackageFunctionName>(<arguments>) <AbstractType> {
+	var <result> <AbstractType>
 	...
 	return <result>
 }
@@ -15,13 +15,6 @@ func <PackageFunctionName>(<arguments>) <ResultType> {
 // This private function returns...
 func <privatePackageFunctionName>(<arguments>) <ResultType> {
 	var <result> <ResultType>
-	...
-	return <result>
-}
-...
-// This function returns...
-func <FunctionName>(<arguments>) <resultType> {
-	var <result> <resultType>
 	...
 	return <result>
 }

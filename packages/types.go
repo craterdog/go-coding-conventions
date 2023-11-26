@@ -1,8 +1,9 @@
 // PACKAGE TYPES
 
-// Primitive Types
+// Specialized Types
 
-// This type definition represents...
+// This specialized type definition represents a specialization of the primitive
+// Go <primitiveType> data type.
 type <TypeName> <primitiveType>
 ...
 
@@ -10,7 +11,7 @@ type <TypeName> <primitiveType>
 
 // This structured type defines the attributes for a <StructureName> entity.
 type <StructureName> struct {
-	<AttributeName> <AttributeType>
+	<AttributeName> <AbstractType>
 	...
 }
 ...
@@ -18,5 +19,5 @@ type <StructureName> struct {
 // Function Types
 
 // This function type defines the signature for a <FunctionName> function.
-type <FunctionName>Function func(<arguments>) <ResultType>
+type <FunctionName>Function func(<arguments>) <AbstractType>
 ...

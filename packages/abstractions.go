@@ -3,7 +3,7 @@
 // Abstract Interfaces
 
 type <InterfaceName> interface {
-	<MethodName>(<arguments>) <ResultType>
+	<MethodName>(<arguments>) <AbstractType>
 	...
 }
 ...
