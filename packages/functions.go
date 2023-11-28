@@ -1,9 +1,7 @@
-// PACKAGE FUNCTIONS
-
 // Public Functions
 
-// This function returns...
-func <PackageFunctionName>(<arguments>) <AbstractType> {
+// This public function returns...
+func <PublicPackageFunctionName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>

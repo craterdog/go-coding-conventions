@@ -54,11 +54,25 @@ func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
 
 // CLASS METHODS
 
+// Extended Type
+
 // This private class type extends the primitive Go <primitiveType> data type
 // and defines the methods that implement the <abstractType> abstract type.
 type <className>_ <primitiveType>
 
-//        OR
+// <InterfaceName> Interface
+
+// This class method...
+func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
+	var <result> <AbstractType>
+	...
+	return <result>
+}
+...
+
+/************************************* OR ************************************/
+
+// Encapsulated Type
 
 // This private class type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
@@ -71,7 +85,7 @@ type <className>_ struct {
 // <InterfaceName> Interface
 
 // This class method...
-func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
+func (v *<className>_) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>

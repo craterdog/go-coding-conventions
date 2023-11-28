@@ -1,5 +1,3 @@
-// PACKAGE TYPES
-
 // Specialized Types
 
 // This specialized type definition represents a specialization of the primitive
