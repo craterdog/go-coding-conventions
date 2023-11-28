@@ -52,8 +52,8 @@ type <FunctionName>Function func(<arguments>) <AbstractType>
 
 // Public Constants
 
-// This constant represents...
-const <PackageConstantName> = <packageConstantValue>
+// This public constant represents...
+const <PublicPackageConstantName> = <publicPackageConstantValue>
 ...
 
 // Private Constants
@@ -66,6 +66,8 @@ const <privatePackageConstantName> = <privatePackageConstantValue>
 
 // Abstract Interfaces
 
+// This abstract interface defines the set of method signatures that must be
+// supported by all <interfaceName> types.
 type <InterfaceName> interface {
 	<MethodName>(<arguments>) <AbstractType>
 	...
@@ -75,7 +77,7 @@ type <InterfaceName> interface {
 // Abstract Types
 
 // This abstract type defines the set of abstract interfaces that must be
-// supported by all <TypeName>Like types.
+// supported by all <typeName>-like types.
 type <TypeName>Like interface {
 	<InterfaceName>
 	...
@@ -84,7 +86,8 @@ type <TypeName>Like interface {
 
 // PACKAGE CLASSES
 
-// This singleton exports a unique namespace for the <className> class type.
+// This singleton exports a unique namespace for the <className> class type and
+// initializes the class constants.
 var <ClassName> = &<className>Class_{
 	<className>_(...), // Initialize the class constant <privateClassConstantName>.
 	...
@@ -95,8 +98,8 @@ var <ClassName> = &<className>Class_{
 
 // Public Functions
 
-// This function returns...
-func <PackageFunctionName>(<arguments>) <AbstractType> {
+// This public function returns...
+func <PublicPackageFunctionName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>

@@ -16,7 +16,7 @@ import (
 
 // CLASS NAMESPACE
 
-// This class namespace type defines the structure associated with the class
+// This private namespace type defines the structure associated with the class
 // constants, constructors and functions for the <className> class.
 type <className>Class_ struct {
 	<classConstantName> <AbstractType>
@@ -34,8 +34,7 @@ func (c *<className>Class_) <ClassConstantName>() <AbstractType> {
 
 // CLASS CONSTRUCTORS
 
-// This constructor creates a new instance of a <className> from the specified
-// <abstractType> value.
+// This class constructor creates a new <className> from the specified <abstractType> value.
 func (c *<className>Class_) From<AbstractType>(value <AbstractType>) <ClassName>Like {
 	var <className> <ClassName>Like
 	...
@@ -45,7 +44,7 @@ func (c *<className>Class_) From<AbstractType>(value <AbstractType>) <ClassName>
 
 // CLASS FUNCTIONS
 
-// This function returns...
+// This class function returns...
 func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
@@ -53,30 +52,25 @@ func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
 }
 ...
 
-// CLASS ATTRIBUTES
+// CLASS METHODS
 
-// Extended Attributes
-
-// This type definition creates a single attribute that can only be accessed
-// and manipulated by the methods that implement its abstract interfaces.
+// This private class type extends the primitive Go <primitiveType> data type
+// and defines the methods that implement the <abstractType> abstract type.
 type <className>_ <primitiveType>
-...
 
-// Encapsulated Attributes
+//        OR
 
-// This type definition creates a set of attributes that can only be accessed
-// and manipulated by the methods that implement its abstract interfaces.
+// This private class type encapsulates a Go structure containing private
+// attributes that can only be accessed and manipulated using methods that
+// implement the <abstractType> abstract type.
 type <className>_ struct {
 	<privateAttributeName> <AbstractType>
 	...
 }
-...
-
-// CLASS METHODS
 
 // <InterfaceName> Interface
 
-// This method returns...
+// This class method returns...
 func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
