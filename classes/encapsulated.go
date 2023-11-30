@@ -1,6 +1,6 @@
 // Encapsulated Type
 
-// This private class type encapsulates a Go structure containing private
+// This private concrete type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
 // implement the <abstractType> abstract type.
 type <className>_ struct {

@@ -121,7 +121,7 @@ func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V]
 
 // CLASS METHODS
 
-// This private class type encapsulates a Go structure containing private
+// This private concrete type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
 // implement the association-like abstract type.
 type association_[K Key, V Value] struct {
@@ -176,7 +176,7 @@ func (c *catalogClass_[K, V]) FromNothing() CatalogLike[K, V] {
 
 // CLASS METHODS
 
-// This private class type encapsulates a Go structure containing private
+// This private concrete type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
 // implement the association-like abstract type.
 type catalog_[K Key, V Value] struct {

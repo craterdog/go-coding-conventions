@@ -127,7 +127,7 @@ func (c *angleClass_) Difference(first, second AngleLike) AngleLike {
 
 // CLASS METHODS
 
-// This private class type extends the primitive Go float64 data type and
+// This private concrete type extends the primitive Go float64 data type and
 // defines the methods that implement the angle-like abstract type.  It
 // represents a radian based angle.
 type angle_ float64
