@@ -84,16 +84,6 @@ type <TypeName>Like interface {
 }
 ...
 
-// PACKAGE CLASSES
-
-// This singleton exports a unique namespace for the <className> class type and
-// initializes the class constants.
-var <ClassName> = &<className>Class_{
-	<className>_(...), // Initialize the class constant <privateClassConstantName>.
-	...
-}
-...
-
 // PACKAGE FUNCTIONS
 
 // Public Functions
@@ -113,5 +103,18 @@ func <privatePackageFunctionName>(<arguments>) <ResultType> {
 	var <result> <ResultType>
 	...
 	return <result>
+}
+...
+
+// PACKAGE CLASSES
+
+// This function returns a reference to the <className> class type and
+// initializes any class constants.
+func <ClassName>() *<className>Class_ {
+	var class = &<className>Class_{
+		<className>_(...), // Initialize the class constant <privateClassConstantName>.
+		...
+	}
+	return class
 }
 ...
