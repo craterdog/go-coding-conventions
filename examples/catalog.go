@@ -265,9 +265,9 @@ func (v *catalog_[K, V]) AddAssociation(association Binding[K, V]) {
 // USAGE EXAMPLE
 
 func main() {
-	var Catalog = Catalog[string, float64]() // Create a specific catalog class type.
-	var Association = Catalog.Association()  // Create a specific association class type.
-	var catalog = Catalog.FromNothing()      // Create an empty catalog class instance.
+	var Catalog = Catalog[string, float64]() // Retrieve a specific catalog class type.
+	var Association = Catalog.Association()  // Retrieve the corresponding association class type.
+	var catalog = Catalog.FromNothing()      // Create a new empty catalog class instance.
 	var association = Association.FromPair("answer", 42.0)
 	catalog.AddAssociation(association)
 	catalog.SetValue("pi", 3.1415)

@@ -102,8 +102,8 @@ func (v *association_[K, V]) SetValue(value V) {
 func main() {
 	var key string = "answer"
 	var value int = 42
-	var Association = Association[string, int]()       // Create a specific association class type.
-	var association = Association.FromPair(key, value) // Create an association.
+	var Association = Association[string, int]()       // Retrieve a specific association class type.
+	var association = Association.FromPair(key, value) // Create a new association.
 	fmt.Printf("key: %q, value: %v\n", association.GetKey(), association.GetValue())
 	association.SetValue(25)
 	fmt.Printf("key: %q, value: %v\n", association.GetKey(), association.GetValue())

@@ -174,11 +174,11 @@ func (v angle_) AsNormalized() float64 {
 // USAGE EXAMPLE
 
 func main() {
-	var Angle = Angle()                          // Creating the angle class type.
-	var pi = Angle.Pi()                          // Accessing a class constant.
-	var angle = Angle.FromFloat(1.23)            // Accessing a class constructor.
-	var delta = Angle.Difference(angle, pi)      // Accessing a class function.
-	fmt.Printf("radians: %v\n", delta.AsFloat()) // Accessing a class method.
+	var Angle = Angle()                          // Retrieve the angle class type.
+	var pi = Angle.Pi()                          // Retrieve a class constant.
+	var angle = Angle.FromFloat(1.23)            // Call a class constructor.
+	var delta = Angle.Difference(angle, pi)      // Call a class function.
+	fmt.Printf("radians: %v\n", delta.AsFloat()) // Call a class method.
 	fmt.Printf("degrees: %v\n", delta.AsDegrees())
 	fmt.Printf("normalized: %v\n", delta.AsNormalized())
 }
