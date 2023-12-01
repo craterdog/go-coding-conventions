@@ -54,7 +54,7 @@ func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
 
 // CLASS METHODS
 
-// Extended Type
+// Extension Methods
 
 // This private concrete type extends the primitive Go <primitiveType> data type
 // and defines the methods that implement the <abstractType> abstract type.
@@ -72,7 +72,7 @@ func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 
 /************************************* OR ************************************/
 
-// Encapsulated Type
+// Encapsulation Methods
 
 // This private concrete type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
