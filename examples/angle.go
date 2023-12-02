@@ -20,8 +20,8 @@ const Tau = 2.0 * mat.Pi
 // This abstract interface defines the set of method signatures that must be
 // supported by all continuous numeric types.
 type Continuous interface {
-	IsZero() bool
 	AsFloat() float64
+	IsZero() bool
 }
 
 // This abstract interface defines the set of method signatures that must be
@@ -134,14 +134,14 @@ type angle_ float64
 
 // Continuous Interface
 
-// This class method whether or not the value for this angle is zero.
-func (v angle_) IsZero() bool {
-	return v == 0
-}
-
 // This class method returns the floating point value for this angle.
 func (v angle_) AsFloat() float64 {
 	return float64(v)
+}
+
+// This class method whether or not the value for this angle is zero.
+func (v angle_) IsZero() bool {
+	return v == 0
 }
 
 // Angular Interface
