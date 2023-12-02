@@ -13,7 +13,7 @@ This package defines...
 For detailed documentation on this package refer to the wiki:
  * https://github.com/craterdog/<repository-name>/wiki
 
-All UpperCase type, constant, abstraction, class and function names are visible
+All UpperCase type, constant, abstraction, function and class names are visible
 to other projects that import this package. All lowercase names are private to
 this package.
 */
