@@ -56,7 +56,8 @@ func Angle() *angleClass_ {
 
 // Public Functions
 
-// This public function returns the circumference of a circle with the specified radius.
+// This public function returns the circumference of a circle with the specified
+// radius.
 func Circumference(radius float64) float64 {
 	var circumference = Tau * radius
 	return circumference
@@ -64,7 +65,8 @@ func Circumference(radius float64) float64 {
 
 // Private Functions
 
-// This private function returns the magnitude (absolute value) of the specified value.
+// This private function returns the magnitude (absolute value) of the specified
+// value.
 func magnitude(value float64) float64 {
 	if value < 0 {
 		return -value
