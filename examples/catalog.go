@@ -26,6 +26,17 @@ type Value any
 //   - 1: The first value comes after the second value.
 type RankingFunction func(first, second any) int
 
+// PACKAGE CONSTANTS
+
+// Private Constants
+
+// These private constants implement the singleton pattern to provide a single
+// references to each class type structure.
+var (
+	associationClassSingletons = map[string]any{}
+	catalogClassSingletons     = map[string]any{}
+)
+
 // PACKAGE ABSTRACTIONS
 
 // Abstract Interfaces
@@ -85,8 +96,17 @@ type CatalogLike[K Key, V Value] interface {
 // This function returns a reference to a specific association class type and
 // initializes any class constants.
 func Association[K Key, V Value]() *associationClass_[K, V] {
-	var class = &associationClass_[K, V]{
-		// This class has no class constants.
+	var class *associationClass_[K, V]
+	var key = fmt.Sprintf("%T", class)
+	var value = associationClassSingletons[key]
+	switch actual := value.(type) {
+	case *associationClass_[K, V]:
+		class = actual
+	default:
+		class = &associationClass_[K, V]{
+			// This class has no class constants.
+		}
+		associationClassSingletons[key] = class
 	}
 	return class
 }
@@ -94,8 +114,17 @@ func Association[K Key, V Value]() *associationClass_[K, V] {
 // This function returns a reference to a specific catalog class type and
 // initializes any class constants.
 func Catalog[K Key, V Value]() *catalogClass_[K, V] {
-	var class = &catalogClass_[K, V]{
-		Association[K, V](), // The corresponding association class type.
+	var class *catalogClass_[K, V]
+	var key = fmt.Sprintf("%T", class)
+	var value = catalogClassSingletons[key]
+	switch actual := value.(type) {
+	case *catalogClass_[K, V]:
+		class = actual
+	default:
+		class = &catalogClass_[K, V]{
+			Association[K, V](), // The corresponding association class type.
+		}
+		catalogClassSingletons[key] = class
 	}
 	return class
 }
@@ -265,16 +294,28 @@ func (v *catalog_[K, V]) AddAssociation(association Binding[K, V]) {
 // USAGE EXAMPLE
 
 func main() {
-	var Catalog = Catalog[string, float64]() // Retrieve a specific catalog class type.
-	var Association = Catalog.Association()  // Retrieve the corresponding association class type.
-	var catalog = Catalog.FromNothing()      // Create a new empty catalog class instance.
+	// Retrieve a specific catalog class type.
+	var Catalog = Catalog[string, float64]()
+
+	// Retrieve the corresponding association class type.
+	var Association = Catalog.Association()
+
+	// Create a new empty catalog class instance.
+	var catalog = Catalog.FromNothing()
+
+	// Add a new association to the catalog.
 	var association = Association.FromPair("answer", 42.0)
 	catalog.AddAssociation(association)
+
+	// Set a new value associated with a key to the catalog.
 	catalog.SetValue("pi", 3.1415)
 	fmt.Printf("empty: %v\n", catalog.IsEmpty())
 	fmt.Printf("size: %v\n", catalog.GetSize())
 	fmt.Printf("answer: %v\n", catalog.GetValue("answer"))
 	fmt.Printf("pi: %v\n", catalog.GetValue("pi"))
+
+	// Remove the value associated with a key from the catalog.
 	catalog.RemoveValue("answer")
 	fmt.Printf("size: %v\n", catalog.GetSize())
 }
+

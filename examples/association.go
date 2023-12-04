@@ -18,6 +18,16 @@ type Key any
 // Go `any` data type to represent the value type in a key-value pair.
 type Value any
 
+// PACKAGE CONSTANTS
+
+// Private Constants
+
+// These private constants implement the singleton pattern to provide a single
+// references to each class type structure.
+var (
+	associationClassSingletons = map[string]any{}
+)
+
 // PACKAGE ABSTRACTIONS
 
 // Abstract Interfaces
@@ -43,8 +53,17 @@ type AssociationLike[K Key, V Value] interface {
 // This function returns a reference to a specific association class type and
 // initializes any class constants.
 func Association[K Key, V Value]() *associationClass_[K, V] {
-	var class = &associationClass_[K, V]{
-		// This class has no class constants.
+	var class *associationClass_[K, V]
+	var key = fmt.Sprintf("%T", class)
+	var value = associationClassSingletons[key]
+	switch actual := value.(type) {
+	case *associationClass_[K, V]:
+		class = actual
+	default:
+		class = &associationClass_[K, V]{
+			// This class has no class constants.
+		}
+		associationClassSingletons[key] = class
 	}
 	return class
 }
@@ -100,11 +119,17 @@ func (v *association_[K, V]) SetValue(value V) {
 // USAGE EXAMPLE
 
 func main() {
+	// Retrieve a specific association class type.
+	var Association = Association[string, int]()
+
+	// Create a new association.
 	var key string = "answer"
 	var value int = 42
-	var Association = Association[string, int]()       // Retrieve a specific association class type.
-	var association = Association.FromPair(key, value) // Create a new association.
+	var association = Association.FromPair(key, value)
 	fmt.Printf("key: %q, value: %v\n", association.GetKey(), association.GetValue())
+
+	// Change the value of the association.
 	association.SetValue(25)
 	fmt.Printf("key: %q, value: %v\n", association.GetKey(), association.GetValue())
 }
+

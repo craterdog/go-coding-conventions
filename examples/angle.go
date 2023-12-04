@@ -9,9 +9,23 @@ import (
 
 // PACKAGE CONSTANTS
 
+// Public Constants
+
 // This constant represents the value tau (τ).
 // See "The Tau Manifesto" at https://tauday.com/tau-manifesto
 const Tau = 2.0 * mat.Pi
+
+// Private Constants
+
+// These private constants implement the singleton pattern to provide a single
+// reference to each class type structure.  It also initializes any class
+// constants.
+var (
+	angleClassSingleton = &angleClass_{
+		angle_(mat.Pi), // Angle.Pi()
+		angle_(Tau),    // Angle.Tau()
+	}
+)
 
 // PACKAGE ABSTRACTIONS
 
@@ -42,14 +56,9 @@ type AngleLike interface {
 
 // PACKAGE CLASSES
 
-// This function returns a reference to the angle class type and
-// initializes any class constants.
+// This function returns a reference to the angle class type singleton.
 func Angle() *angleClass_ {
-	var class = &angleClass_{
-		angle_(mat.Pi),
-		angle_(Tau),
-	}
-	return class
+	return angleClassSingleton
 }
 
 // PACKAGE FUNCTIONS
@@ -176,11 +185,21 @@ func (v angle_) AsNormalized() float64 {
 // USAGE EXAMPLE
 
 func main() {
-	var Angle = Angle()                          // Retrieve the angle class type.
-	var pi = Angle.Pi()                          // Retrieve a class constant.
-	var angle = Angle.FromFloat(1.23)            // Call a class constructor.
-	var delta = Angle.Difference(angle, pi)      // Call a class function.
-	fmt.Printf("radians: %v\n", delta.AsFloat()) // Call a class method.
+	// Retrieve the angle class type.
+	var Angle = Angle()
+
+	// Retrieve a class constant.
+	var pi = Angle.Pi()
+
+	// Call a class constructor.
+	var angle = Angle.FromFloat(1.23)
+
+	// Call a class function.
+	var delta = Angle.Difference(angle, pi)
+
+	// Call class methods.
+	fmt.Printf("radians: %v\n", delta.AsFloat())
 	fmt.Printf("degrees: %v\n", delta.AsDegrees())
 	fmt.Printf("normalized: %v\n", delta.AsNormalized())
 }
+
