@@ -54,13 +54,6 @@ type AngleLike interface {
 	Angular
 }
 
-// PACKAGE CLASSES
-
-// This function returns a reference to the angle class type singleton.
-func Angle() *angleClass_ {
-	return angleClassSingleton
-}
-
 // PACKAGE FUNCTIONS
 
 // Public Functions
@@ -81,6 +74,13 @@ func magnitude(value float64) float64 {
 		return -value
 	}
 	return value
+}
+
+// PACKAGE CLASSES
+
+// This function returns a reference to the angle class type singleton.
+func Angle() *angleClass_ {
+	return angleClassSingleton
 }
 
 /********************************** angle.go **********************************/
