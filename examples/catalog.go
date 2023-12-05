@@ -30,8 +30,8 @@ type RankingFunction func(first, second any) int
 
 // Private Constants
 
-// These private constants implement the singleton pattern to provide a single
-// references to each class type structure.
+// These private constants define maps to reference multiple singletons for each
+// generic class type structure.
 var (
 	associationClassSingletons = map[string]any{}
 	catalogClassSingletons     = map[string]any{}

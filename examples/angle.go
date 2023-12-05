@@ -18,7 +18,7 @@ const Tau = 2.0 * mat.Pi
 // Private Constants
 
 // These private constants implement the singleton pattern to provide a single
-// reference to each class type structure.  It also initializes any class
+// reference to each class type structure.  They also initialize any class
 // constants.
 var (
 	angleClassSingleton = &angleClass_{
