@@ -1,4 +1,4 @@
-// Encapsulated Type
+// Encapsulation Methods
 
 // This private concrete type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
