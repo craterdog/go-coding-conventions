@@ -62,6 +62,24 @@ const <PublicPackageConstantName> = <publicPackageConstantValue>
 const <privatePackageConstantName> = <privatePackageConstantValue>
 ...
 
+// These private constants implement the singleton pattern to provide a single
+// reference to each class type structure.  They also initialize any class
+// constants.
+var (
+	<className>ClassSingleton = &<className>Class_{
+		<className>_(...),
+		...
+	}
+	...
+)
+
+// These private constants define maps to reference multiple singletons for each
+// generic class type structure.
+var (
+	<genericClassName>ClassSingletons = map[string]any{}
+	...
+)
+
 // PACKAGE ABSTRACTIONS
 
 // Abstract Interfaces
@@ -108,13 +126,29 @@ func <privatePackageFunctionName>(<arguments>) <ResultType> {
 
 // PACKAGE CLASSES
 
-// This function returns a reference to the <className> class type and
-// initializes any class constants.
+// This function returns a reference to the <className> class type singleton.
 func <ClassName>() *<className>Class_ {
-	var class = &<className>Class_{
-		<className>_(...), // Initialize the class constant <privateClassConstantName>.
-		...
+	return <className>ClassSingleton
+}
+...
+
+// This function returns a reference to a specific <className> class type
+// singleton and initializes any class constants.
+func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
+	var class *<className>Class_[<parameters>]
+	var key = fmt.Sprintf("%T", class)
+	var value = <className>ClassSingletons[key]
+	switch actual := value.(type) {
+	case *<className>Class_[<parameters>]:
+		class = actual
+	default:
+		class = &<className>Class_[<parameters>]{
+			<classConstantValue>,
+			...
+		}
+		<className>ClassSingletons[key] = class
 	}
 	return class
 }
 ...
+
