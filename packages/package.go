@@ -10,12 +10,10 @@
 
 /*
 This package defines...
-For detailed documentation on this package refer to the wiki:
- * https://github.com/craterdog/<repository-name>/wiki
 
-All UpperCase type, constant, abstraction, function and class names are visible
-to other projects that import this package. All lowercase names are private to
-this package.
+For detailed documentation on this package refer to the wiki:
+
+    https://github.com/craterdog/<repository-name>/wiki
 */
 package <packageName>
 
@@ -44,41 +42,15 @@ type <StructureName> struct {
 
 // Function Types
 
-// This function type defines the signature for a <FunctionName> function.
+// This function type defines the signature for any function that...
 type <FunctionName>Function func(<arguments>) <AbstractType>
 ...
 
 // PACKAGE CONSTANTS
 
-// Public Constants
-
-// This public constant represents...
-const <PublicPackageConstantName> = <publicPackageConstantValue>
+// This constant represents...
+const <PackageConstantName> = <packageConstantValue>
 ...
-
-// Private Constants
-
-// This private constant represents...
-const <privatePackageConstantName> = <privatePackageConstantValue>
-...
-
-// These private constants implement the singleton pattern to provide a single
-// reference to each class type structure.  They also initialize any class
-// constants.
-var (
-	<className>ClassSingleton = &<className>Class_{
-		<className>_(...),
-		...
-	}
-	...
-)
-
-// These private constants define maps to reference multiple singletons for each
-// generic class type structure.
-var (
-	<genericClassName>ClassSingletons = map[string]any{}
-	...
-)
 
 // PACKAGE ABSTRACTIONS
 
@@ -104,51 +76,10 @@ type <TypeName>Like interface {
 
 // PACKAGE FUNCTIONS
 
-// Public Functions
-
-// This public function returns...
-func <PublicPackageFunctionName>(<arguments>) <AbstractType> {
+// This function returns...
+func <PackageFunctionName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
 }
 ...
-
-// Private Functions
-
-// This private function returns...
-func <privatePackageFunctionName>(<arguments>) <ResultType> {
-	var <result> <ResultType>
-	...
-	return <result>
-}
-...
-
-// PACKAGE CLASSES
-
-// This function returns a reference to the <className> class type singleton.
-func <ClassName>() *<className>Class_ {
-	return <className>ClassSingleton
-}
-...
-
-// This function returns a reference to a specific <className> class type
-// singleton and initializes any class constants.
-func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
-	var class *<className>Class_[<parameters>]
-	var key = fmt.Sprintf("%T", class)
-	var value = <className>ClassSingletons[key]
-	switch actual := value.(type) {
-	case *<className>Class_[<parameters>]:
-		class = actual
-	default:
-		class = &<className>Class_[<parameters>]{
-			<classConstantValue>,
-			...
-		}
-		<className>ClassSingletons[key] = class
-	}
-	return class
-}
-...
-

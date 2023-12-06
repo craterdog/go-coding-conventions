@@ -1,6 +1,0 @@
-// This class function returns...
-func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
-	var <result> <AbstractType>
-	...
-	return <result>
-}

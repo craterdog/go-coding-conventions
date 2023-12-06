@@ -14,28 +14,70 @@ import (
 	fmt "fmt"
 )
 
-// CLASS TYPE
+// CLASS NAMESPACE
 
-// This private class type defines the structure associated with the constants,
-// constructors and functions for the <className> class.
-type <className>Class_ struct {
+// This private type defines the namepace structure associated with the constants,
+// constructors and functions for the <className> class namespace.
+type <className>Class_[<parameterTypes>] struct {
 	<classConstantName> <AbstractType>
 	...
 }
-...
+
+// Specific Namespace
+
+// This private constant defines the singleton reference to the <className>
+// class namespace.  It also initializes any class constants as needed.
+var <className>ClassSingleton = &<className>Class_{
+	<classConstantValue>,
+	...
+}
+
+// This public function returns the singleton reference to the <className>
+// class namespace.
+func <ClassName>() *<className>Class_ {
+	return <className>ClassSingleton
+}
+
+/************************************* OR ************************************/
+
+// Generic Namespace
+
+// This private constant defines a map to hold all the singleton references to
+// the type specific <className> namespaces.
+var <className>ClassSingletons = map[string]any{}
+
+// This public function returns the singleton reference to a type specific
+// <className> namespace.  It also initializes any class constants as needed.
+func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
+	var class *<className>Class_[<parameters>]
+	var key = fmt.Sprintf("%T", class)
+	var value = <className>ClassSingletons[key]
+	switch actual := value.(type) {
+	case *<className>Class_[<parameters>]:
+		class = actual
+	default:
+		class = &<className>Class_[<parameters>]{
+			<classConstantValue>,
+			...
+		}
+		<className>ClassSingletons[key] = class
+	}
+	return class
+}
 
 // CLASS CONSTANTS
 
-// This class constant represents...
-func (c *<className>Class_) <ClassConstantName>() <AbstractType> {
+// This public class constant represents...
+func (c *<className>Class_[<parameters>]) <ClassConstantName>() <AbstractType> {
 	return c.<classConstantName>
 }
 ...
 
 // CLASS CONSTRUCTORS
 
-// This class constructor creates a new <className> from the specified <abstractType> value.
-func (c *<className>Class_) From<AbstractType>(value <AbstractType>) <ClassName>Like {
+// This public class constructor creates a new <className> from the specified
+// <abstractType> value.
+func (c *<className>Class_[<parameters>]) From<AbstractType>(value <AbstractType>) <ClassName>Like[<parameters>] {
 	var <className> <ClassName>Like
 	...
 	return <className>
@@ -44,25 +86,25 @@ func (c *<className>Class_) From<AbstractType>(value <AbstractType>) <ClassName>
 
 // CLASS FUNCTIONS
 
-// This class function returns...
-func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
+// This public class function returns...
+func (c *<className>Class_[<parameters>]) <FunctionName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
 }
 ...
 
-// CLASS METHODS
+// CLASS TYPE
 
-// Extension Methods
+// Extended Type
 
-// This private concrete type extends the primitive Go <primitiveType> data type
+// This private class type extends the primitive Go <primitiveType> data type
 // and defines the methods that implement the <className>-like abstract type.
 type <className>_ <primitiveType>
 
 // <InterfaceName> Interface
 
-// This class method...
+// This public class method...
 func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
@@ -72,20 +114,20 @@ func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 
 /************************************* OR ************************************/
 
-// Encapsulation Methods
+// Encapsulated Type
 
-// This private concrete type encapsulates a Go structure containing private
+// This private class type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
-// implement the <abstractType> abstract type.
-type <className>_ struct {
+// implement the <className>-like abstract type.
+type <className>_[<parameterTypes>] struct {
 	<privateAttributeName> <AbstractType>
 	...
 }
 
 // <InterfaceName> Interface
 
-// This class method...
-func (v *<className>_) <MethodName>(<arguments>) <AbstractType> {
+// This public class method...
+func (v *<className>_[<parameters>]) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>

@@ -1,11 +1,11 @@
-// This function returns a reference to the <className> class type singleton.
-func <ClassName>() *<className>Class_ {
-	return <className>ClassSingleton
-}
-...
+// Generic Namespace
 
-// This function returns a reference to a specific <className> class type
-// singleton and initializes any class constants.
+// This private constant defines a map to hold all the singleton references to
+// the type specific <className> namespaces.
+var <className>ClassSingletons = map[string]any{}
+
+// This public function returns the singleton reference to a type specific
+// <className> namespace.  It also initializes any class constants as needed.
 func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
 	var class *<className>Class_[<parameters>]
 	var key = fmt.Sprintf("%T", class)
@@ -22,5 +22,3 @@ func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
 	}
 	return class
 }
-...
-

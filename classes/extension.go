@@ -1,12 +1,12 @@
-// Extension Methods
+// Extended Type
 
-// This private concrete type extends the primitive Go <primitiveType> data type
+// This private class type extends the primitive Go <primitiveType> data type
 // and defines the methods that implement the <className>-like abstract type.
 type <className>_ <primitiveType>
 
 // <InterfaceName> Interface
 
-// This class method...
+// This public class method...
 func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...

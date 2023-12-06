@@ -16,6 +16,6 @@ type <StructureName> struct {
 
 // Function Types
 
-// This function type defines the signature for a <FunctionName> function.
+// This function type defines the signature for any function that...
 type <FunctionName>Function func(<arguments>) <AbstractType>
 ...
