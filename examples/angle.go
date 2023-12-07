@@ -53,7 +53,7 @@ func Circumference(radius float64) float64 {
 
 // CLASS NAMESPACE
 
-// This private type defines the namepace structure associated with the
+// This private type defines the namespace structure associated with the
 // constants, constructors and functions for the angle class namespace.
 type angleClass_ struct {
 	pi  AngleLike

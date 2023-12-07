@@ -87,7 +87,7 @@ type CatalogLike[K Key, V Value] interface {
 
 // CLASS NAMESPACE
 
-// This private type defines the namepace structure associated with the
+// This private type defines the namespace structure associated with the
 // constants, constructors and functions for the association class namespace.
 type associationClass_[K Key, V Value] struct {
 	// This class has no class constants.
@@ -163,7 +163,7 @@ func (v *association_[K, V]) SetValue(value V) {
 
 // CLASS NAMESPACE
 
-// This private type defines the namepace structure associated with the
+// This private type defines the namespace structure associated with the
 // constants, constructors and functions for the catalog class namespace.
 type catalogClass_[K Key, V Value] struct {
 	association *associationClass_[K, V]
