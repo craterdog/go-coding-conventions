@@ -13,3 +13,13 @@ func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 	return <result>
 }
 ...
+
+// Private Interface
+
+// This private class method...
+func (v <className>_) <methodName>(<arguments>) <AbstractType> {
+	var <result> <AbstractType>
+	...
+	return <result>
+}
+...
