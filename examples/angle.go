@@ -190,4 +190,3 @@ func main() {
 	fmt.Printf("degrees: %v\n", delta.AsDegrees())
 	fmt.Printf("normalized: %v\n", delta.AsNormalized())
 }
-

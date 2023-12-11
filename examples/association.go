@@ -145,4 +145,3 @@ func main() {
 	association.SetValue(25)
 	fmt.Printf("key: %q, value: %v\n", association.GetKey(), association.GetValue())
 }
-
