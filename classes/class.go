@@ -17,7 +17,7 @@ import (
 // CLASS NAMESPACE
 
 // This private type defines the namespace structure associated with the
-// constants, constructors and functions for the <className> class namespace.
+// constants, constructors and functions for the <ClassName> class namespace.
 type <className>Class_[<parameterTypes>] struct {
 	<classConstantName> <AbstractType>
 	...
@@ -25,14 +25,14 @@ type <className>Class_[<parameterTypes>] struct {
 
 // Specific Namespace
 
-// This private constant defines the singleton reference to the <className>
+// This private constant defines the singleton reference to the <ClassName>
 // class namespace.  It also initializes any class constants as needed.
 var <className>ClassSingleton = &<className>Class_{
 	<classConstantValue>,
 	...
 }
 
-// This public function returns the singleton reference to the <className>
+// This public function returns the singleton reference to the <ClassName>
 // class namespace.
 func <ClassName>() *<className>Class_ {
 	return <className>ClassSingleton
@@ -43,11 +43,12 @@ func <ClassName>() *<className>Class_ {
 // Generic Namespace
 
 // This private constant defines a map to hold all the singleton references to
-// the type specific <className> namespaces.
+// the type specific <ClassName> class namespaces.
 var <className>ClassSingletons = map[string]any{}
 
 // This public function returns the singleton reference to a type specific
-// <className> namespace.  It also initializes any class constants as needed.
+// <ClassName> class namespace.  It also initializes any class constants as
+// needed.
 func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
 	var class *<className>Class_[<parameters>]
 	var key = fmt.Sprintf("%T", class)
@@ -75,7 +76,7 @@ func (c *<className>Class_[<parameters>]) <ClassConstantName>() <AbstractType> {
 
 // CLASS CONSTRUCTORS
 
-// This public class constructor creates a new <className> from the specified
+// This public class constructor creates a new <ClassName> from the specified
 // <abstractType> value.
 func (c *<className>Class_[<parameters>]) From<AbstractType>(value <AbstractType>) <ClassName>Like[<parameters>] {
 	var <className> <ClassName>Like[<parameters>]
@@ -99,7 +100,7 @@ func (c *<className>Class_[<parameters>]) <FunctionName>(<arguments>) <AbstractT
 // Extended Type
 
 // This private class type extends the primitive Go <primitiveType> data type
-// and defines the methods that implement the <className>-like abstract type.
+// and defines the methods that implement the <ClassName>Like abstract type.
 type <className>_ <primitiveType>
 
 // <InterfaceName> Interface
@@ -128,7 +129,7 @@ func (v <className>_) <methodName>(<arguments>) <AbstractType> {
 
 // This private class type encapsulates a Go structure containing private
 // attributes that can only be accessed and manipulated using methods that
-// implement the <className>-like abstract type.
+// implement the <ClassName>Like abstract type.
 type <className>_[<parameterTypes>] struct {
 	<privateAttributeName> <AbstractType>
 	...

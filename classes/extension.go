@@ -1,7 +1,7 @@
 // Extended Type
 
 // This private class type extends the primitive Go <primitiveType> data type
-// and defines the methods that implement the <className>-like abstract type.
+// and defines the methods that implement the <ClassName>Like abstract type.
 type <className>_ <primitiveType>
 
 // <InterfaceName> Interface
