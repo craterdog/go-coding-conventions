@@ -9,12 +9,14 @@ var <className>ClassSingletons = map[string]any{}
 // needed.
 func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
 	var class *<className>Class_[<parameters>]
-	var key = fmt.Sprintf("%T", class)
+	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = <className>ClassSingletons[key]
 	switch actual := value.(type) {
 	case *<className>Class_[<parameters>]:
+		// This bound class type already exists.
 		class = actual
 	default:
+		// Create a new bound class type.
 		class = &<className>Class_[<parameters>]{
 			<classConstantName>: <classConstantValue>,
 			...

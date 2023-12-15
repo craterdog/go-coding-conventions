@@ -102,12 +102,14 @@ var associationClassSingletons = map[string]any{}
 // needed.
 func Association[K Key, V Value]() *associationClass_[K, V] {
 	var class *associationClass_[K, V]
-	var key = fmt.Sprintf("%T", class)
+	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = associationClassSingletons[key]
 	switch actual := value.(type) {
 	case *associationClass_[K, V]:
+		// This bound class type already exists.
 		class = actual
 	default:
+		// Create a new bound class type.
 		class = &associationClass_[K, V]{
 			// This class has no class constants.
 		}
@@ -162,7 +164,7 @@ func (v *association_[K, V]) SetValue(value V) {
 	v.value = value
 }
 
-/******************************************************************************/
+/********************************* catalog.go *********************************/
 
 // CLASS NAMESPACE
 
@@ -180,12 +182,14 @@ var catalogClassSingletons = map[string]any{}
 // Catalog class namespace.  It also initializes any class constants as needed.
 func Catalog[K Key, V Value]() *catalogClass_[K, V] {
 	var class *catalogClass_[K, V]
-	var key = fmt.Sprintf("%T", class)
+	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = catalogClassSingletons[key]
 	switch actual := value.(type) {
 	case *catalogClass_[K, V]:
+		// This bound class type already exists.
 		class = actual
 	default:
+		// Create a new bound class type.
 		class = &catalogClass_[K, V]{
 			Association[K, V](), // The corresponding Association class namespace.
 		}

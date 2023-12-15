@@ -70,12 +70,14 @@ var associationClassSingletons = map[string]any{}
 // needed.
 func Association[K Key, V Value]() *associationClass_[K, V] {
 	var class *associationClass_[K, V]
-	var key = fmt.Sprintf("%T", class)
+	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = associationClassSingletons[key]
 	switch actual := value.(type) {
 	case *associationClass_[K, V]:
+		// This bound class type already exists.
 		class = actual
 	default:
+		// Create a new bound class type.
 		class = &associationClass_[K, V]{
 			// This class has no class constants.
 		}
