@@ -36,8 +36,8 @@ type Angular interface {
 // This abstract type defines the set of abstract interfaces that must be
 // supported by all AngleLike types.
 type AngleLike interface {
-	Continuous
 	Angular
+	Continuous
 }
 
 // PACKAGE FUNCTIONS
@@ -63,8 +63,8 @@ type angleClass_ struct {
 // This private constant defines the singleton reference to the Angle
 // class namespace.  It also initializes any class constants as needed.
 var angleClassSingleton = &angleClass_{
-	angle_(mat.Pi), // Angle.Pi()
-	angle_(Tau),    // Angle.Tau()
+	pi: angle_(mat.Pi), // Angle.Pi()
+	tau: angle_(Tau),    // Angle.Tau()
 }
 
 // This public function returns the singleton reference to the Angle
@@ -130,18 +130,6 @@ func (c *angleClass_) Difference(first, second AngleLike) AngleLike {
 // It represents a radian based Angle.
 type angle_ float64
 
-// Continuous Interface
-
-// This public class method returns the floating point value for this Angle.
-func (v angle_) AsFloat() float64 {
-	return float64(v)
-}
-
-// This public class method whether or not the value for this Angle is zero.
-func (v angle_) IsZero() bool {
-	return v == 0
-}
-
 // Angular Interface
 
 // This public class method returns the floating point value for this Angle in
@@ -168,6 +156,18 @@ func (v angle_) AsNormalized() float64 {
 	return angle
 }
 
+// Continuous Interface
+
+// This public class method returns the floating point value for this Angle.
+func (v angle_) AsFloat() float64 {
+	return float64(v)
+}
+
+// This public class method whether or not the value for this Angle is zero.
+func (v angle_) IsZero() bool {
+	return v == 0
+}
+
 /******************************************************************************/
 
 // USAGE EXAMPLE
@@ -186,7 +186,7 @@ func main() {
 	var delta = Angle.Difference(angle, pi)
 
 	// Call class methods.
-	fmt.Printf("radians: %v\n", delta.AsFloat())
 	fmt.Printf("degrees: %v\n", delta.AsDegrees())
+	fmt.Printf("radians: %v\n", delta.AsFloat())
 	fmt.Printf("normalized: %v\n", delta.AsNormalized())
 }

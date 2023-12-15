@@ -33,7 +33,7 @@ type RankingFunction func(first Value, second Value) int
 // Abstract Interfaces
 
 // This abstract interface defines the set of method signatures that must be
-// supported by all binding Associations.  It binds a readonly key with a
+// supported by all binding Associations.  It binds a read-only key with a
 // setable value.
 type Binding[K Key, V Value] interface {
 	GetKey() K
@@ -44,19 +44,19 @@ type Binding[K Key, V Value] interface {
 // This abstract interface defines the set of method signatures that must be
 // supported by all sequences of values.
 type Sequential[V Value] interface {
-	IsEmpty() bool
-	GetSize() int
 	AsArray() []V
+	GetSize() int
+	IsEmpty() bool
 }
 
 // This abstract interface defines the set of method signatures that must be
 // supported by all associative sequences whose values consist of key-value
 // pair Associations.
 type Associative[K Key, V Value] interface {
-	GetValue(key K) V
-	SetValue(key K, value V)
-	RemoveValue(key K) V
 	AddAssociation(association Binding[K, V])
+	GetValue(key K) V
+	RemoveValue(key K) V
+	SetValue(key K, value V)
 }
 
 // This abstract interface defines the set of method signatures that must be
@@ -121,7 +121,10 @@ func Association[K Key, V Value]() *associationClass_[K, V] {
 // This public class constructor creates a new Association from the specified
 // key and value.
 func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V] {
-	var association = &association_[K, V]{key, value}
+	var association = &association_[K, V]{
+		key: key,
+		value: value,
+	}
 	return association
 }
 
@@ -136,7 +139,7 @@ func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V]
 //   - K is a primitive type of key.
 //   - V is any type of value.
 //
-// This structure is used by the Catalog class to maintain its Associations.
+// This structure is used by the catalog class to maintain its Associations.
 type association_[K Key, V Value] struct {
 	key   K
 	value V
@@ -159,7 +162,7 @@ func (v *association_[K, V]) SetValue(value V) {
 	v.value = value
 }
 
-/********************************* catalog.go *********************************/
+/******************************************************************************/
 
 // CLASS NAMESPACE
 
@@ -203,10 +206,12 @@ func (c *catalogClass_[K, V]) Association() *associationClass_[K, V] {
 
 // This public class constructor creates a new empty Catalog.
 func (c *catalogClass_[K, V]) Empty() CatalogLike[K, V] {
-	var catalog CatalogLike[K, V]
-	var keys = map[Key]Binding[K, V]{}
 	var associations = []Binding[K, V]{}
-	catalog = &catalog_[K, V]{keys, associations}
+	var keys = map[Key]Binding[K, V]{}
+	var catalog CatalogLike[K, V] = &catalog_[K, V]{
+		associations,
+		keys,
+	}
 	return catalog
 }
 
@@ -221,22 +226,11 @@ func (c *catalogClass_[K, V]) Empty() CatalogLike[K, V] {
 //   - K is a primitive type of key.
 //   - V is any type of value.
 type catalog_[K Key, V Value] struct {
-	keys         map[Key]Binding[K, V]
 	associations []Binding[K, V]
+	keys         map[Key]Binding[K, V]
 }
 
 // Sequential Interface
-
-// This public class method determines whether or not this sequence is empty.
-func (v *catalog_[K, V]) IsEmpty() bool {
-	return len(v.associations) == 0
-}
-
-// This public class method returns the number of values contained in this
-// sequence.
-func (v *catalog_[K, V]) GetSize() int {
-	return len(v.associations)
-}
 
 // This public class method returns an array of the values in this sequence.
 func (v *catalog_[K, V]) AsArray() []Binding[K, V] {
@@ -246,7 +240,27 @@ func (v *catalog_[K, V]) AsArray() []Binding[K, V] {
 	return result
 }
 
+// This public class method returns the number of values contained in this
+// sequence.
+func (v *catalog_[K, V]) GetSize() int {
+	return len(v.associations)
+}
+
+// This public class method determines whether or not this sequence is empty.
+func (v *catalog_[K, V]) IsEmpty() bool {
+	return len(v.associations) == 0
+}
+
 // Associative Interface
+
+// This public class method adds to this Catalog the specified key-value pair
+// Association.  If an Association with that key already exists in the
+// Catalog, the value for the Association is updated to the new value.
+func (v *catalog_[K, V]) AddAssociation(association Binding[K, V]) {
+	var key = association.GetKey()
+	var value = association.GetValue()
+	v.SetValue(key, value)
+}
 
 // This public class method returns from this Catalog the value that is
 // associated with the specified key.
@@ -258,21 +272,6 @@ func (v *catalog_[K, V]) GetValue(key K) V {
 		value = association.GetValue()
 	}
 	return value
-}
-
-// This public class method sets in this Catalog the value that is associated
-// with the specified key to the specified new value.
-func (v *catalog_[K, V]) SetValue(key K, value V) {
-	var association, exists = v.keys[key]
-	if exists {
-		// Set the value of an existing Association.
-		association.SetValue(value)
-	} else {
-		// Add a new Association.
-		association = &association_[K, V]{key, value}
-		v.associations = append(v.associations, association)
-		v.keys[key] = association
-	}
 }
 
 // This public class method removes from this Catalog the value associated with
@@ -293,13 +292,19 @@ func (v *catalog_[K, V]) RemoveValue(key K) V {
 	return old
 }
 
-// This public class method adds to this Catalog the specified key-value pair
-// Association.  If an Association with that key already exists in the
-// Catalog, the value for the Association is updated to the new value.
-func (v *catalog_[K, V]) AddAssociation(association Binding[K, V]) {
-	var key = association.GetKey()
-	var value = association.GetValue()
-	v.SetValue(key, value)
+// This public class method sets in this Catalog the value that is associated
+// with the specified key to the specified new value.
+func (v *catalog_[K, V]) SetValue(key K, value V) {
+	var association, exists = v.keys[key]
+	if exists {
+		// Set the value of an existing Association.
+		association.SetValue(value)
+	} else {
+		// Add a new Association.
+		association = &association_[K, V]{key, value}
+		v.associations = append(v.associations, association)
+		v.keys[key] = association
+	}
 }
 
 /******************************************************************************/

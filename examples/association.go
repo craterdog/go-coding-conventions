@@ -35,7 +35,7 @@ type RankingFunction func(first Value, second Value) int
 // Abstract Interfaces
 
 // This abstract interface defines the set of method signatures that must be
-// supported by all binding Associations.  It binds a readonly key with a
+// supported by all binding Associations.  It binds a read-only key with a
 // setable value.
 type Binding[K Key, V Value] interface {
 	GetKey() K
@@ -89,7 +89,10 @@ func Association[K Key, V Value]() *associationClass_[K, V] {
 // This public class constructor creates a new Association from the specified
 // key and value.
 func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V] {
-	var association = &association_[K, V]{key, value}
+	var association = &association_[K, V]{
+		key: key,
+		value: value,
+	}
 	return association
 }
 
