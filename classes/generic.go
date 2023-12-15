@@ -16,7 +16,7 @@ func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
 		class = actual
 	default:
 		class = &<className>Class_[<parameters>]{
-			<classConstantValue>,
+			<classConstantName>: <classConstantValue>,
 			...
 		}
 		<className>ClassSingletons[key] = class

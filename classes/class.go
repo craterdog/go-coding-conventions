@@ -28,7 +28,7 @@ type <className>Class_[<parameterTypes>] struct {
 // This private constant defines the singleton reference to the <ClassName>
 // class namespace.  It also initializes any class constants as needed.
 var <className>ClassSingleton = &<className>Class_{
-	<classConstantValue>,
+	<classConstantName>: <classConstantValue>,
 	...
 }
 
@@ -58,7 +58,7 @@ func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
 		class = actual
 	default:
 		class = &<className>Class_[<parameters>]{
-			<classConstantValue>,
+			<classConstantName>: <classConstantValue>,
 			...
 		}
 		<className>ClassSingletons[key] = class
@@ -79,8 +79,11 @@ func (c *<className>Class_[<parameters>]) <ClassConstantName>() <AbstractType> {
 // This public class constructor creates a new <ClassName> from the specified
 // <abstractType> value.
 func (c *<className>Class_[<parameters>]) From<AbstractType>(value <AbstractType>) <ClassName>Like[<parameters>] {
-	var <className> <ClassName>Like[<parameters>]
 	...
+	var <className> <ClassName>Like[<parameters>] = &<className>_[<parameters>]{
+		<privateAttributeName>: <privateAttributeValue>,
+		...
+	}
 	return <className>
 }
 ...
