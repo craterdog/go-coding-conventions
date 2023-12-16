@@ -14,6 +14,11 @@ This package defines...
 For detailed documentation on this package refer to the wiki:
 
     https://github.com/craterdog/<repository-name>/wiki
+
+This package follows the _Crater Dog Technologies™ Go Coding Conventions_
+located here:
+
+	https://github.com/craterdog/go-coding-conventions/wiki
 */
 package <packageName>
 
