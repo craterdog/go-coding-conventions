@@ -63,7 +63,7 @@ type angleClass_ struct {
 // This private constant defines the singleton reference to the Angle
 // class namespace.  It also initializes any class constants as needed.
 var angleClassSingleton = &angleClass_{
-	pi: angle_(mat.Pi), // Angle.Pi()
+	pi:  angle_(mat.Pi), // Angle.Pi()
 	tau: angle_(Tau),    // Angle.Tau()
 }
 
