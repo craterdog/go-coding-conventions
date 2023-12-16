@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	fmt "fmt"
+)
 
 /********************************* package.go *********************************/
 
@@ -23,6 +25,7 @@ type Value any
 // This function type defines the signature for any function that can determine
 // the relative ordering of two specified values. The result must be one of
 // the following:
+//
 //	-1: The first value is less than the second value.
 //	 0: The first value is equal to the second value.
 //	 1: The first value is more than the second value.
@@ -124,7 +127,7 @@ func Association[K Key, V Value]() *associationClass_[K, V] {
 // key and value.
 func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V] {
 	var association = &association_[K, V]{
-		key: key,
+		key:   key,
 		value: value,
 	}
 	return association
