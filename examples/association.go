@@ -25,9 +25,9 @@ type Value any
 // This function type defines the signature for any function that can determine
 // the relative ordering of two specified values. The result must be one of
 // the following:
-//   - -1: The first value is less than the second value.
-//   - 0: The first value is equal to the second value.
-//   - 1: The first value is more than the second value.
+//	-1: The first value is less than the second value.
+//	 0: The first value is equal to the second value.
+//	 1: The first value is more than the second value.
 type RankingFunction func(first Value, second Value) int
 
 // PACKAGE ABSTRACTIONS
