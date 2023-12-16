@@ -216,8 +216,8 @@ func (c *catalogClass_[K, V]) Empty() CatalogLike[K, V] {
 	var associations = []Binding[K, V]{}
 	var keys = map[Key]Binding[K, V]{}
 	var catalog CatalogLike[K, V] = &catalog_[K, V]{
-		associations,
-		keys,
+		associations: associations,
+		keys:         keys,
 	}
 	return catalog
 }
@@ -308,7 +308,10 @@ func (v *catalog_[K, V]) SetValue(key K, value V) {
 		association.SetValue(value)
 	} else {
 		// Add a new Association.
-		association = &association_[K, V]{key, value}
+		association = &association_[K, V]{
+			key:   key,
+			value: value,
+		}
 		v.associations = append(v.associations, association)
 		v.keys[key] = association
 	}
