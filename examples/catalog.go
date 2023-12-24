@@ -96,17 +96,17 @@ type associationClass_[K Key, V Value] struct {
 	// This class has no class constants.
 }
 
-// This private constant defines a map to hold all the singleton references to
+// This private constant defines a map to hold all the single references to
 // the type specific Association class namespaces.
-var associationClassSingletons = map[string]any{}
+var associationClass = map[string]any{}
 
-// This public function returns the singleton reference to a type specific
+// This public function returns the single reference to a type specific
 // Association class namespace.  It also initializes any class constants as
 // needed.
 func Association[K Key, V Value]() *associationClass_[K, V] {
 	var class *associationClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
-	var value = associationClassSingletons[key]
+	var value = associationClass[key]
 	switch actual := value.(type) {
 	case *associationClass_[K, V]:
 		// This bound class type already exists.
@@ -116,7 +116,7 @@ func Association[K Key, V Value]() *associationClass_[K, V] {
 		class = &associationClass_[K, V]{
 			// This class has no class constants.
 		}
-		associationClassSingletons[key] = class
+		associationClass[key] = class
 	}
 	return class
 }
@@ -177,16 +177,16 @@ type catalogClass_[K Key, V Value] struct {
 	association *associationClass_[K, V]
 }
 
-// This private constant defines a map to hold all the singleton references to
+// This private constant defines a map to hold all the single references to
 // the type specific Catalog class namespaces.
-var catalogClassSingletons = map[string]any{}
+var catalogClass = map[string]any{}
 
-// This public function returns the singleton reference to a type specific
+// This public function returns the single reference to a type specific
 // Catalog class namespace.  It also initializes any class constants as needed.
 func Catalog[K Key, V Value]() *catalogClass_[K, V] {
 	var class *catalogClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
-	var value = catalogClassSingletons[key]
+	var value = catalogClass[key]
 	switch actual := value.(type) {
 	case *catalogClass_[K, V]:
 		// This bound class type already exists.
@@ -196,7 +196,7 @@ func Catalog[K Key, V Value]() *catalogClass_[K, V] {
 		class = &catalogClass_[K, V]{
 			Association[K, V](), // The corresponding Association class namespace.
 		}
-		catalogClassSingletons[key] = class
+		catalogClass[key] = class
 	}
 	return class
 }

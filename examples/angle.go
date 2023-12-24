@@ -60,17 +60,17 @@ type angleClass_ struct {
 	tau AngleLike
 }
 
-// This private constant defines the singleton reference to the Angle
+// This private constant defines the single reference to the Angle
 // class namespace.  It also initializes any class constants as needed.
-var angleClassSingleton = &angleClass_{
+var angleClass = &angleClass_{
 	pi:  angle_(mat.Pi), // Angle.Pi()
 	tau: angle_(Tau),    // Angle.Tau()
 }
 
-// This public function returns the singleton reference to the Angle
+// This public function returns the single reference to the Angle
 // class namespace.
 func Angle() *angleClass_ {
-	return angleClassSingleton
+	return angleClass
 }
 
 // CLASS CONSTANTS

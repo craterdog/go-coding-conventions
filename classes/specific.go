@@ -1,14 +1,14 @@
 // Specific Namespace
 
-// This private constant defines the singleton reference to the <ClassName>
+// This private constant defines the single reference to the <ClassName>
 // class namespace.  It also initializes any class constants as needed.
-var <className>ClassSingleton = &<className>Class_{
+var <className>Class = &<className>Class_{
 	<classConstantName>: <classConstantValue>,
 	...
 }
 
-// This public function returns the singleton reference to the <ClassName>
+// This public function returns the single reference to the <ClassName>
 // class namespace.
 func <ClassName>() *<className>Class_ {
-	return <className>ClassSingleton
+	return <className>Class
 }
