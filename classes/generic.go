@@ -27,7 +27,7 @@ type <className>Class_[<parameterTypes>] struct {
 
 var <className>Class = map[string]any{}
 
-func <ClassName>[<parameterTypes>]() <ClassName>ClassLike[<parameters>] {
+func <ClassName>Class[<parameterTypes>]() <ClassName>ClassLike[<parameters>] {
 	var class *<className>Class_[<parameters>]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = <className>Class[key]

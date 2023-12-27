@@ -30,7 +30,7 @@ var <className>Class = &<className>Class_{
 	...
 }
 
-func <ClassName>() <ClassName>ClassLike {
+func <ClassName>Class() <ClassName>ClassLike {
 	return <className>Class
 }
 
