@@ -114,9 +114,11 @@ type associationClass_[K Key, V Value] struct {
 	// This class has no class constants.
 }
 
-// Public Class Namespace Access
+// Private Class Namespace References
 
 var associationClass = map[string]any{}
+
+// Public Class Namespace Access
 
 func AssociationClass[K Key, V Value]() AssociationClassLike[K, V] {
 	var class *associationClass_[K, V]
@@ -179,9 +181,11 @@ type catalogClass_[K Key, V Value] struct {
 	associationClass AssociationClassLike[K, V]
 }
 
-// Public Class Namespace Access
+// Private Class Namespace References
 
 var catalogClass = map[string]any{}
+
+// Public Class Namespace Access
 
 func CatalogClass[K Key, V Value]() CatalogClassLike[K, V] {
 	var class *catalogClass_[K, V]

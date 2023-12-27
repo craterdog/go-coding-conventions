@@ -64,12 +64,14 @@ type angleClass_ struct {
 	tau AngleLike
 }
 
-// Public Class Namespace Access
+// Private Class Namespace Reference
 
 var angleClass = &angleClass_{
 	pi:  angle_(mat.Pi), // Angle.Pi()
 	tau: angle_(Tau),    // Angle.Tau()
 }
+
+// Public Class Namespace Access
 
 func AngleClass() AngleClassLike {
 	return angleClass

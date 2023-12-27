@@ -23,9 +23,11 @@ type <className>Class_[<parameterTypes>] struct {
 	...
 }
 
-// Public Class Namespace Access
+// Private Class Namespace References
 
 var <className>Class = map[string]any{}
+
+// Public Class Namespace Access
 
 func <ClassName>Class[<parameterTypes>]() <ClassName>ClassLike[<parameters>] {
 	var class *<className>Class_[<parameters>]

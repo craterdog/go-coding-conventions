@@ -23,12 +23,14 @@ type <className>Class_ struct {
 	...
 }
 
-// Public Class Namespace Access
+// Private Class Namespace Reference
 
 var <className>Class = &<className>Class_{
 	<classConstantName>: <classConstantValue>,
 	...
 }
+
+// Public Class Namespace Access
 
 func <ClassName>Class() <ClassName>ClassLike {
 	return <className>Class
