@@ -62,7 +62,7 @@ type associationClass_[K Key, V Value] struct {
 
 var associationClass = map[string]any{}
 
-func Association[K Key, V Value]() AssociationClassLike[K, V] {
+func AssociationClass[K Key, V Value]() AssociationClassLike[K, V] {
 	var class *associationClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = associationClass[key]
@@ -119,7 +119,7 @@ func (v *association_[K, V]) SetValue(value V) {
 
 func main() {
 	// Retrieve a specific association class namespace.
-	var Association = Association[string, int]()
+	var Association = AssociationClass[string, int]()
 
 	// Create a new association.
 	var key string = "answer"

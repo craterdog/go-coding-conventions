@@ -118,7 +118,7 @@ type associationClass_[K Key, V Value] struct {
 
 var associationClass = map[string]any{}
 
-func Association[K Key, V Value]() AssociationClassLike[K, V] {
+func AssociationClass[K Key, V Value]() AssociationClassLike[K, V] {
 	var class *associationClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = associationClass[key]
@@ -183,7 +183,7 @@ type catalogClass_[K Key, V Value] struct {
 
 var catalogClass = map[string]any{}
 
-func Catalog[K Key, V Value]() CatalogClassLike[K, V] {
+func CatalogClass[K Key, V Value]() CatalogClassLike[K, V] {
 	var class *catalogClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = catalogClass[key]
@@ -194,7 +194,7 @@ func Catalog[K Key, V Value]() CatalogClassLike[K, V] {
 	default:
 		// Create a new bound class type.
 		class = &catalogClass_[K, V]{
-			associationClass: Association[K, V](),
+			associationClass: AssociationClass[K, V](),
 		}
 		catalogClass[key] = class
 	}
@@ -304,7 +304,7 @@ func (v *catalog_[K, V]) SetValue(key K, value V) {
 
 func main() {
 	// Retrieve a specific catalog class namespace.
-	var Catalog = Catalog[string, float64]()
+	var Catalog = CatalogClass[string, float64]()
 
 	// Retrieve the corresponding association class namespace.
 	var Association = Catalog.GetAssociationClass()

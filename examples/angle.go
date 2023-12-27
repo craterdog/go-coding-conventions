@@ -71,7 +71,7 @@ var angleClass = &angleClass_{
 	tau: angle_(Tau),    // Angle.Tau()
 }
 
-func Angle() AngleClassLike {
+func AngleClass() AngleClassLike {
 	return angleClass
 }
 
@@ -162,7 +162,7 @@ func (v angle_) IsZero() bool {
 
 func main() {
 	// Retrieve the angle class namespace.
-	var Angle = Angle()
+	var Angle = AngleClass()
 
 	// Retrieve a class constant.
 	var pi = Angle.GetPi()
