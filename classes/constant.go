@@ -1,4 +1,4 @@
-func (c *<className>Class_[<parameters>]) Get<ClassConstantName>() <AbstractType> {
+func (c *<className>Class_) Get<ClassConstantName>() <AbstractType> {
 	return c.<classConstantName>
 }
 

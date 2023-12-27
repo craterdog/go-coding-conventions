@@ -1,6 +1,6 @@
-func (c *<className>Class_[<parameters>]) <ConstructorName>(<arguments>) <ClassName>Like[<parameters>] {
+func (c *<className>Class_) <ConstructorName>(<arguments>) <ClassName>Like {
 	...
-	var <className> = &<className>_[<parameters>]{
+	var <className> = &<className>_{
 		<privateAttributeName>: <privateAttributeValue>,
 		...
 	}
