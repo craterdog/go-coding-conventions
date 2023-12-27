@@ -1,12 +1,9 @@
-// Extended Type
+// Private Class Type Definition
 
-// This private class type extends the primitive Go <primitiveType> data type
-// and defines the methods that implement the <ClassName>Like abstract type.
 type <className>_ <primitiveType>
 
 // <InterfaceName> Interface
 
-// This public class method...
 func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
@@ -16,10 +13,10 @@ func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
 
 // Private Interface
 
-// This private class method...
 func (v <className>_) <methodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
 }
 ...
+

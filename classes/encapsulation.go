@@ -1,8 +1,5 @@
-// Encapsulated Type
+// Private Class Type Definition
 
-// This private class type encapsulates a Go structure containing private
-// attributes that can only be accessed and manipulated using methods that
-// implement the <ClassName>Like abstract type.
 type <className>_[<parameterTypes>] struct {
 	<privateAttributeName> <AbstractType>
 	...
@@ -10,7 +7,6 @@ type <className>_[<parameterTypes>] struct {
 
 // <InterfaceName> Interface
 
-// This public class method...
 func (v *<className>_[<parameters>]) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
@@ -20,10 +16,10 @@ func (v *<className>_[<parameters>]) <MethodName>(<arguments>) <AbstractType> {
 
 // Private Interface
 
-// This private class method...
 func (v *<className>_[<parameters>]) <methodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
 }
 ...
+

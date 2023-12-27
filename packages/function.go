@@ -1,6 +1,0 @@
-// This function returns...
-func <PackageFunctionName>(<arguments>) <AbstractType> {
-	var <result> <AbstractType>
-	...
-	return <result>
-}

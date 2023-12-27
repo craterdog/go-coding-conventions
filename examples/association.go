@@ -20,23 +20,12 @@ type Key any
 // as values.
 type Value any
 
-// Function Types
-
-// This function type defines the signature for any function that can determine
-// the relative ordering of two specified values. The result must be one of
-// the following:
-//
-//	-1: The first value is less than the second value.
-//	 0: The first value is equal to the second value.
-//	 1: The first value is more than the second value.
-type RankingFunction func(first Value, second Value) int
-
 // PACKAGE ABSTRACTIONS
 
 // Abstract Interfaces
 
 // This abstract interface defines the set of method signatures that must be
-// supported by all binding Associations.  It binds a read-only key with a
+// supported by all binding associations.  It binds a read-only key with a
 // setable value.
 type Binding[K Key, V Value] interface {
 	GetKey() K
@@ -46,8 +35,15 @@ type Binding[K Key, V Value] interface {
 
 // Abstract Types
 
+// This abstract type defines the set of class constants, constructors and
+// functions that must be supported by all association-class-like types.
+type AssociationClassLike[K Key, V Value] interface {
+	// constructors
+	FromPair(key K, value V) AssociationLike[K, V]
+}
+
 // This abstract type defines the set of abstract interfaces that must be
-// supported by all AssociationLike types.
+// supported by all association-like types.
 type AssociationLike[K Key, V Value] interface {
 	Binding[K, V]
 }
@@ -56,20 +52,17 @@ type AssociationLike[K Key, V Value] interface {
 
 // CLASS NAMESPACE
 
-// This private type defines the namespace structure associated with the
-// constants, constructors and functions for the Association class namespace.
+// Private Class Namespace Type
+
 type associationClass_[K Key, V Value] struct {
 	// This class has no class constants.
 }
 
-// This private constant defines a map to hold all the single references to
-// the type specific Association class namespaces.
+// Public Class Namespace Access
+
 var associationClass = map[string]any{}
 
-// This public function returns the single reference to a type specific
-// Association class namespace.  It also initializes any class constants as
-// needed.
-func Association[K Key, V Value]() *associationClass_[K, V] {
+func Association[K Key, V Value]() AssociationClassLike[K, V] {
 	var class *associationClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = associationClass[key]
@@ -87,10 +80,8 @@ func Association[K Key, V Value]() *associationClass_[K, V] {
 	return class
 }
 
-// CLASS CONSTRUCTORS
+// Public Class Constructors
 
-// This public class constructor creates a new Association from the specified
-// key and value.
 func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V] {
 	var association = &association_[K, V]{
 		key:   key,
@@ -101,16 +92,8 @@ func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V]
 
 // CLASS TYPE
 
-// Encapsulated Type
+// Private Class Type Definition
 
-// This private class structure encapsulates a Go structure containing private
-// attributes that can only be accessed and manipulated using methods that
-// implement the AssociationLike abstract type.  The attributes maintain the
-// information about a key-value pair. This type is parameterized as follows:
-//   - K is a primitive type of key.
-//   - V is any type of value.
-//
-// This structure is used by the catalog class to maintain its Associations.
 type association_[K Key, V Value] struct {
 	key   K
 	value V
@@ -118,17 +101,14 @@ type association_[K Key, V Value] struct {
 
 // Binding Interface
 
-// This public class method returns the key for this Association.
 func (v *association_[K, V]) GetKey() K {
 	return v.key
 }
 
-// This public class method returns the value for this Association.
 func (v *association_[K, V]) GetValue() V {
 	return v.value
 }
 
-// This public class method sets the value of this Association to a new value.
 func (v *association_[K, V]) SetValue(value V) {
 	v.value = value
 }
@@ -138,16 +118,16 @@ func (v *association_[K, V]) SetValue(value V) {
 // USAGE EXAMPLE
 
 func main() {
-	// Retrieve a specific Association class namespace.
+	// Retrieve a specific association class namespace.
 	var Association = Association[string, int]()
 
-	// Create a new Association.
+	// Create a new association.
 	var key string = "answer"
 	var value int = 42
 	var association = Association.FromPair(key, value)
 	fmt.Printf("key: %q, value: %v\n", association.GetKey(), association.GetValue())
 
-	// Change the value of the Association.
+	// Change the value of the association.
 	association.SetValue(25)
 	fmt.Printf("key: %q, value: %v\n", association.GetKey(), association.GetValue())
 }

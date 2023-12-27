@@ -23,12 +23,14 @@ type Value any
 // Function Types
 
 // This function type defines the signature for any function that can determine
-// the relative ordering of two specified values. The result must be one of
-// the following:
+// the relative ordering of two values. The result must be one of the following:
 //
 //	-1: The first value is less than the second value.
 //	 0: The first value is equal to the second value.
 //	 1: The first value is more than the second value.
+//
+// The meaning of "less" and "more" is determined by the specific function that
+// implements this signature.
 type RankingFunction func(first Value, second Value) int
 
 // PACKAGE ABSTRACTIONS
@@ -36,7 +38,7 @@ type RankingFunction func(first Value, second Value) int
 // Abstract Interfaces
 
 // This abstract interface defines the set of method signatures that must be
-// supported by all binding Associations.  It binds a read-only key with a
+// supported by all binding associations.  It binds a read-only key with a
 // setable value.
 type Binding[K Key, V Value] interface {
 	GetKey() K
@@ -54,7 +56,7 @@ type Sequential[V Value] interface {
 
 // This abstract interface defines the set of method signatures that must be
 // supported by all associative sequences whose values consist of key-value
-// pair Associations.
+// pair associations.
 type Associative[K Key, V Value] interface {
 	AddAssociation(association Binding[K, V])
 	GetValue(key K) V
@@ -72,14 +74,30 @@ type Sortable[V Value] interface {
 
 // Abstract Types
 
+// This abstract type defines the set of class constants, constructors and
+// functions that must be supported by all association-class-like types.
+type AssociationClassLike[K Key, V Value] interface {
+	// constructors
+	FromPair(key K, value V) AssociationLike[K, V]
+}
+
 // This abstract type defines the set of abstract interfaces that must be
-// supported by all AssociationLike types.
+// supported by all association-like types.
 type AssociationLike[K Key, V Value] interface {
 	Binding[K, V]
 }
 
+// This abstract type defines the set of class constants, constructors and
+// functions that must be supported by all catalog-class-like types.
+type CatalogClassLike[K Key, V Value] interface {
+	// constants
+	GetAssociationClass() AssociationClassLike[K, V]
+	// constructors
+	Empty() CatalogLike[K, V]
+}
+
 // This abstract type defines the set of abstract interfaces that must be
-// supported by all CatalogLike types.
+// supported by all catalog-like types.
 type CatalogLike[K Key, V Value] interface {
 	Sequential[Binding[K, V]]
 	Associative[K, V]
@@ -90,20 +108,17 @@ type CatalogLike[K Key, V Value] interface {
 
 // CLASS NAMESPACE
 
-// This private type defines the namespace structure associated with the
-// constants, constructors and functions for the Association class namespace.
+// Private Class Namespace Type
+
 type associationClass_[K Key, V Value] struct {
 	// This class has no class constants.
 }
 
-// This private constant defines a map to hold all the single references to
-// the type specific Association class namespaces.
+// Public Class Namespace Access
+
 var associationClass = map[string]any{}
 
-// This public function returns the single reference to a type specific
-// Association class namespace.  It also initializes any class constants as
-// needed.
-func Association[K Key, V Value]() *associationClass_[K, V] {
+func Association[K Key, V Value]() AssociationClassLike[K, V] {
 	var class *associationClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = associationClass[key]
@@ -121,10 +136,8 @@ func Association[K Key, V Value]() *associationClass_[K, V] {
 	return class
 }
 
-// CLASS CONSTRUCTORS
+// Public Class Constructors
 
-// This public class constructor creates a new Association from the specified
-// key and value.
 func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V] {
 	var association = &association_[K, V]{
 		key:   key,
@@ -135,16 +148,8 @@ func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V]
 
 // CLASS TYPE
 
-// Encapsulated Type
+// Private Class Type Definition
 
-// This private class structure encapsulates a Go structure containing private
-// attributes that can only be accessed and manipulated using methods that
-// implement the AssociationLike abstract type.  The attributes maintain the
-// information about a key-value pair. This type is parameterized as follows:
-//   - K is a primitive type of key.
-//   - V is any type of value.
-//
-// This structure is used by the catalog class to maintain its Associations.
 type association_[K Key, V Value] struct {
 	key   K
 	value V
@@ -152,17 +157,14 @@ type association_[K Key, V Value] struct {
 
 // Binding Interface
 
-// This public class method returns the key for this Association.
 func (v *association_[K, V]) GetKey() K {
 	return v.key
 }
 
-// This public class method returns the value for this Association.
 func (v *association_[K, V]) GetValue() V {
 	return v.value
 }
 
-// This public class method sets the value of this Association to a new value.
 func (v *association_[K, V]) SetValue(value V) {
 	v.value = value
 }
@@ -171,19 +173,17 @@ func (v *association_[K, V]) SetValue(value V) {
 
 // CLASS NAMESPACE
 
-// This private type defines the namespace structure associated with the
-// constants, constructors and functions for the Catalog class namespace.
+// Private Class Namespace Type
+
 type catalogClass_[K Key, V Value] struct {
-	association *associationClass_[K, V]
+	associationClass AssociationClassLike[K, V]
 }
 
-// This private constant defines a map to hold all the single references to
-// the type specific Catalog class namespaces.
+// Public Class Namespace Access
+
 var catalogClass = map[string]any{}
 
-// This public function returns the single reference to a type specific
-// Catalog class namespace.  It also initializes any class constants as needed.
-func Catalog[K Key, V Value]() *catalogClass_[K, V] {
+func Catalog[K Key, V Value]() CatalogClassLike[K, V] {
 	var class *catalogClass_[K, V]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = catalogClass[key]
@@ -194,24 +194,21 @@ func Catalog[K Key, V Value]() *catalogClass_[K, V] {
 	default:
 		// Create a new bound class type.
 		class = &catalogClass_[K, V]{
-			Association[K, V](), // The corresponding Association class namespace.
+			associationClass: Association[K, V](),
 		}
 		catalogClass[key] = class
 	}
 	return class
 }
 
-// CLASS CONSTANTS
+// Public Class Constants
 
-// This public class constant returns a reference to the corresponding specific
-// Association class namespace.
-func (c *catalogClass_[K, V]) Association() *associationClass_[K, V] {
-	return c.association
+func (c *catalogClass_[K, V]) GetAssociationClass() AssociationClassLike[K, V] {
+	return c.associationClass
 }
 
-// CLASS CONSTRUCTORS
+// Public Class Constructors
 
-// This public class constructor creates a new empty Catalog.
 func (c *catalogClass_[K, V]) Empty() CatalogLike[K, V] {
 	var associations = []Binding[K, V]{}
 	var keys = map[Key]Binding[K, V]{}
@@ -224,14 +221,8 @@ func (c *catalogClass_[K, V]) Empty() CatalogLike[K, V] {
 
 // CLASS TYPE
 
-// Encapsulated Type
+// Private Class Type Definition
 
-// This private class structure encapsulates a Go structure containing private
-// attributes that can only be accessed and manipulated using methods that
-// implement the CatalogLike abstract type.  This type is parameterized as
-// follows:
-//   - K is a primitive type of key.
-//   - V is any type of value.
 type catalog_[K Key, V Value] struct {
 	associations []Binding[K, V]
 	keys         map[Key]Binding[K, V]
@@ -239,7 +230,6 @@ type catalog_[K Key, V Value] struct {
 
 // Sequential Interface
 
-// This public class method returns an array of the values in this sequence.
 func (v *catalog_[K, V]) AsArray() []Binding[K, V] {
 	var length = len(v.associations)
 	var result = make([]Binding[K, V], length)
@@ -247,30 +237,22 @@ func (v *catalog_[K, V]) AsArray() []Binding[K, V] {
 	return result
 }
 
-// This public class method returns the number of values contained in this
-// sequence.
 func (v *catalog_[K, V]) GetSize() int {
 	return len(v.associations)
 }
 
-// This public class method determines whether or not this sequence is empty.
 func (v *catalog_[K, V]) IsEmpty() bool {
 	return len(v.associations) == 0
 }
 
 // Associative Interface
 
-// This public class method adds to this Catalog the specified key-value pair
-// Association.  If an Association with that key already exists in the
-// Catalog, the value for the Association is updated to the new value.
 func (v *catalog_[K, V]) AddAssociation(association Binding[K, V]) {
 	var key = association.GetKey()
 	var value = association.GetValue()
 	v.SetValue(key, value)
 }
 
-// This public class method returns from this Catalog the value that is
-// associated with the specified key.
 func (v *catalog_[K, V]) GetValue(key K) V {
 	var value V // Set the return value to its zero value.
 	var association, exists = v.keys[key]
@@ -281,15 +263,16 @@ func (v *catalog_[K, V]) GetValue(key K) V {
 	return value
 }
 
-// This public class method removes from this Catalog the value associated with
-// the specified key and returns it.
 func (v *catalog_[K, V]) RemoveValue(key K) V {
 	var old V // Set the return value to its zero value.
 	var association, exists = v.keys[key]
 	if exists {
 		for index, candidate := range v.associations {
 			if fmt.Sprint(candidate.GetKey()) == fmt.Sprint(key) {
-				v.associations = append(v.associations[:index], v.associations[index+1:]...)
+				v.associations = append(
+					v.associations[:index],
+					v.associations[index+1:]...,
+				)
 				break
 			}
 		}
@@ -299,15 +282,13 @@ func (v *catalog_[K, V]) RemoveValue(key K) V {
 	return old
 }
 
-// This public class method sets in this Catalog the value that is associated
-// with the specified key to the specified new value.
 func (v *catalog_[K, V]) SetValue(key K, value V) {
 	var association, exists = v.keys[key]
 	if exists {
-		// Set the value of an existing Association.
+		// Set the value of an existing association.
 		association.SetValue(value)
 	} else {
-		// Add a new Association.
+		// Add a new association.
 		association = &association_[K, V]{
 			key:   key,
 			value: value,
@@ -322,27 +303,27 @@ func (v *catalog_[K, V]) SetValue(key K, value V) {
 // USAGE EXAMPLE
 
 func main() {
-	// Retrieve a specific Catalog class namespace.
+	// Retrieve a specific catalog class namespace.
 	var Catalog = Catalog[string, float64]()
 
-	// Retrieve the corresponding Association class namespace.
-	var Association = Catalog.Association()
+	// Retrieve the corresponding association class namespace.
+	var Association = Catalog.GetAssociationClass()
 
-	// Create a new empty Catalog class instance.
+	// Create a new empty catalog class instance.
 	var catalog = Catalog.Empty()
 
-	// Add a new Association to the Catalog.
+	// Add a new association to the catalog.
 	var association = Association.FromPair("answer", 42.0)
 	catalog.AddAssociation(association)
 
-	// Set a new value associated with a key to the Catalog.
+	// Set a new value associated with a key to the catalog.
 	catalog.SetValue("pi", 3.1415)
 	fmt.Printf("empty: %v\n", catalog.IsEmpty())
 	fmt.Printf("size: %v\n", catalog.GetSize())
 	fmt.Printf("answer: %v\n", catalog.GetValue("answer"))
 	fmt.Printf("pi: %v\n", catalog.GetValue("pi"))
 
-	// Remove the value associated with a key from the Catalog.
+	// Remove the value associated with a key from the catalog.
 	catalog.RemoveValue("answer")
 	fmt.Printf("size: %v\n", catalog.GetSize())
 }

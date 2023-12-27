@@ -16,73 +16,36 @@ import (
 
 // CLASS NAMESPACE
 
-// This private type defines the namespace structure associated with the
-// constants, constructors and functions for the <ClassName> class namespace.
-type <className>Class_[<parameterTypes>] struct {
+// Private Class Namespace Type
+
+type <className>Class_ struct {
 	<classConstantName> <AbstractType>
 	...
 }
 
-// Specific Namespace
+// Public Class Namespace Access
 
-// This private constant defines the single reference to the <ClassName>
-// class namespace.  It also initializes any class constants as needed.
 var <className>Class = &<className>Class_{
 	<classConstantName>: <classConstantValue>,
 	...
 }
 
-// This public function returns the single reference to the <ClassName>
-// class namespace.
-func <ClassName>() *<className>Class_ {
+func <ClassName>() <ClassName>ClassLike {
 	return <className>Class
 }
 
-/************************************* OR ************************************/
+// Public Class Constants
 
-// Generic Namespace
-
-// This private constant defines a map to hold all the single references to
-// the type specific <ClassName> class namespaces.
-var <className>Class = map[string]any{}
-
-// This public function returns the single reference to a type specific
-// <ClassName> class namespace.  It also initializes any class constants as
-// needed.
-func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
-	var class *<className>Class_[<parameters>]
-	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
-	var value = <className>Class[key]
-	switch actual := value.(type) {
-	case *<className>Class_[<parameters>]:
-		// This bound class type already exists.
-		class = actual
-	default:
-		// Create a new bound class type.
-		class = &<className>Class_[<parameters>]{
-			<classConstantName>: <classConstantValue>,
-			...
-		}
-		<className>Class[key] = class
-	}
-	return class
-}
-
-// CLASS CONSTANTS
-
-// This public class constant represents...
-func (c *<className>Class_[<parameters>]) <ClassConstantName>() <AbstractType> {
+func (c *<className>Class_) Get<ClassConstantName>() <AbstractType> {
 	return c.<classConstantName>
 }
 ...
 
-// CLASS CONSTRUCTORS
+// Public Class Constructors
 
-// This public class constructor creates a new <ClassName> from the specified
-// <abstractType> value.
-func (c *<className>Class_[<parameters>]) From<AbstractType>(value <AbstractType>) <ClassName>Like[<parameters>] {
+func (c *<className>Class_) <ConstructorName>(<arguments>) <ClassName>Like {
 	...
-	var <className> <ClassName>Like[<parameters>] = &<className>_[<parameters>]{
+	var <className> = &<className>_{
 		<privateAttributeName>: <privateAttributeValue>,
 		...
 	}
@@ -90,10 +53,9 @@ func (c *<className>Class_[<parameters>]) From<AbstractType>(value <AbstractType
 }
 ...
 
-// CLASS FUNCTIONS
+// Public Class Functions
 
-// This public class function returns...
-func (c *<className>Class_[<parameters>]) <FunctionName>(<arguments>) <AbstractType> {
+func (c *<className>Class_) <FunctionName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
@@ -102,48 +64,16 @@ func (c *<className>Class_[<parameters>]) <FunctionName>(<arguments>) <AbstractT
 
 // CLASS TYPE
 
-// Extended Type
+// Private Class Type Definition
 
-// This private class type extends the primitive Go <primitiveType> data type
-// and defines the methods that implement the <ClassName>Like abstract type.
-type <className>_ <primitiveType>
-
-// <InterfaceName> Interface
-
-// This public class method...
-func (v <className>_) <MethodName>(<arguments>) <AbstractType> {
-	var <result> <AbstractType>
-	...
-	return <result>
-}
-...
-
-// Private Interface
-
-// This private class method...
-func (v <className>_) <methodName>(<arguments>) <AbstractType> {
-	var <result> <AbstractType>
-	...
-	return <result>
-}
-...
-
-/************************************* OR ************************************/
-
-// Encapsulated Type
-
-// This private class type encapsulates a Go structure containing private
-// attributes that can only be accessed and manipulated using methods that
-// implement the <ClassName>Like abstract type.
-type <className>_[<parameterTypes>] struct {
+type <className>_ struct {
 	<privateAttributeName> <AbstractType>
 	...
 }
 
 // <InterfaceName> Interface
 
-// This public class method...
-func (v *<className>_[<parameters>]) <MethodName>(<arguments>) <AbstractType> {
+func (v *<className>_) <MethodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
@@ -152,10 +82,10 @@ func (v *<className>_[<parameters>]) <MethodName>(<arguments>) <AbstractType> {
 
 // Private Interface
 
-// This private class method...
-func (v *<className>_[<parameters>]) <methodName>(<arguments>) <AbstractType> {
+func (v *<className>_) <methodName>(<arguments>) <AbstractType> {
 	var <result> <AbstractType>
 	...
 	return <result>
 }
 ...
+

@@ -1,6 +1,18 @@
-// This private type defines the namespace structure associated with the
-// constants, constructors and functions for the <ClassName> class namespace.
-type <className>Class_[<parameterTypes>] struct {
+// Private Class Namespace Type
+
+type <className>Class_ struct {
 	<classConstantName> <AbstractType>
 	...
 }
+
+// Public Class Namespace Access
+
+var <className>Class = &<className>Class_{
+	<classConstantName>: <classConstantValue>,
+	...
+}
+
+func <ClassName>() <ClassName>ClassLike {
+	return <className>Class
+}
+

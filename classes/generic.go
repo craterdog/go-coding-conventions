@@ -1,13 +1,33 @@
-// Generic Namespace
+/*******************************************************************************
+ *   Copyright (c) 2009-2023 Crater Dog Technologies™.  All Rights Reserved.   *
+ *******************************************************************************
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.               *
+ *                                                                             *
+ * This code is free software; you can redistribute it and/or modify it under  *
+ * the terms of The MIT License (MIT), as published by the Open Source         *
+ * Initiative. (See http://opensource.org/licenses/MIT)                        *
+ *******************************************************************************/
 
-// This private constant defines a map to hold all the single references to
-// the type specific <ClassName> class namespaces.
+package <packageName>
+
+import (
+	fmt "fmt"
+)
+
+// CLASS NAMESPACE
+
+// Private Class Namespace Type
+
+type <className>Class_[<parameterTypes>] struct {
+	<classConstantName> <AbstractType>
+	...
+}
+
+// Public Class Namespace Access
+
 var <className>Class = map[string]any{}
 
-// This public function returns the single reference to a type specific
-// <ClassName> class namespace.  It also initializes any class constants as
-// needed.
-func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
+func <ClassName>[<parameterTypes>]() <ClassName>ClassLike[<parameters>] {
 	var class *<className>Class_[<parameters>]
 	var key = fmt.Sprintf("%T", class) // The name of the bound class type.
 	var value = <className>Class[key]
@@ -25,3 +45,59 @@ func <ClassName>[<parameterTypes>]() *<className>Class_[<parameters>] {
 	}
 	return class
 }
+
+// Public Class Constants
+
+func (c *<className>Class_[<parameters>]) Get<ClassConstantName>() <AbstractType> {
+	return c.<classConstantName>
+}
+...
+
+// Public Class Constructors
+
+func (c *<className>Class_[<parameters>]) <ConstructorName>(<arguments>) <ClassName>Like[<parameters>] {
+	...
+	var <className> = &<className>_[<parameters>]{
+		<privateAttributeName>: <privateAttributeValue>,
+		...
+	}
+	return <className>
+}
+...
+
+// Public Class Functions
+
+func (c *<className>Class_[<parameters>]) <FunctionName>(<arguments>) <AbstractType> {
+	var <result> <AbstractType>
+	...
+	return <result>
+}
+...
+
+// CLASS TYPE
+
+// Private Class Type Definition
+
+type <className>_[<parameterTypes>] struct {
+	<privateAttributeName> <AbstractType>
+	...
+}
+
+// <InterfaceName> Interface
+
+func (v *<className>_[<parameters>]) <MethodName>(<arguments>) <AbstractType> {
+	var <result> <AbstractType>
+	...
+	return <result>
+}
+...
+
+// Private Interface
+
+func (v *<className>_[<parameters>]) <methodName>(<arguments>) <AbstractType> {
+	var <result> <AbstractType>
+	...
+	return <result>
+}
+...
+

@@ -9,40 +9,41 @@
  *******************************************************************************/
 
 /*
-This package defines...
+This package file defines the INTERFACE to this package.  Any additions to the
+types defined in this file require a MINOR version change.  Any deletions from,
+or changes to, the types defined in this file require a MAJOR version change.
+
+The package...
 
 For detailed documentation on this package refer to the wiki:
 
-    https://github.com/craterdog/<repository-name>/wiki
+    https://github.com/<repository-name>/wiki
 
-This package follows the Crater Dog Technologies™ Go Coding Conventions
-located here:
+This package follows the Crater Dog Technologies™ Go Coding Conventions located
+here:
 
 	https://github.com/craterdog/go-coding-conventions/wiki
+
+Additional implementations of the classes provided by this package can be
+developed and used seamlessly since the interface definitions only depend on
+other interfaces and primitive types; and the class implementations only depend
+on interfaces, not on each other.
 */
 package <packageName>
 
-import (
-	fmt "fmt"
-	...
-)
+// PACKAGE CONSTANTS
+
+// This package constant represents...
+const <PackageConstantName> = <packageConstantValue>
+...
 
 // PACKAGE TYPES
 
 // Specialized Types
 
 // This specialized type definition represents a specialization of the primitive
-// Go <primitiveType> data type.
+// Go <primitive type> data type.
 type <TypeName> <primitiveType>
-...
-
-// Structured Types
-
-// This structured type defines the attributes for a <StructureName> entity.
-type <StructureName> struct {
-	<AttributeName> <AbstractType>
-	...
-}
 ...
 
 // Function Types
@@ -51,18 +52,12 @@ type <StructureName> struct {
 type <FunctionName>Function func(<arguments>) <AbstractType>
 ...
 
-// PACKAGE CONSTANTS
-
-// This constant represents...
-const <PackageConstantName> = <packageConstantValue>
-...
-
 // PACKAGE ABSTRACTIONS
 
 // Abstract Interfaces
 
 // This abstract interface defines the set of method signatures that must be
-// supported by all <InterfaceName> types.
+// supported by all <interface name> types.
 type <InterfaceName> interface {
 	<MethodName>(<arguments>) <AbstractType>
 	...
@@ -71,20 +66,23 @@ type <InterfaceName> interface {
 
 // Abstract Types
 
+// This abstract type defines the set of class constants, constructors and
+// functions that must be supported by all <type-name>-class-like types.
+type <TypeName>ClassLike interface {
+	Get<ConstantName>() <AbstractType>
+	...
+	<ConstructorName>(<arguments>) <TypeName>Like
+	...
+	<FunctionName>(<arguments>) <AbstractType>
+	...
+}
+...
+
 // This abstract type defines the set of abstract interfaces that must be
-// supported by all <TypeName>Like types.
+// supported by all <type-name>-like types.
 type <TypeName>Like interface {
 	<InterfaceName>
 	...
 }
 ...
 
-// PACKAGE FUNCTIONS
-
-// This function returns...
-func <PackageFunctionName>(<arguments>) <AbstractType> {
-	var <result> <AbstractType>
-	...
-	return <result>
-}
-...
