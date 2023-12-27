@@ -148,7 +148,7 @@ func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V]
 	return association
 }
 
-// CLASS TYPE
+// CLASS INSTANCES
 
 // Private Class Type Definition
 
@@ -223,7 +223,7 @@ func (c *catalogClass_[K, V]) Empty() CatalogLike[K, V] {
 	return catalog
 }
 
-// CLASS TYPE
+// CLASS INSTANCES
 
 // Private Class Type Definition
 

@@ -76,7 +76,7 @@ func (c *<className>Class_[<parameters>]) <FunctionName>(<arguments>) <AbstractT
 }
 ...
 
-// CLASS TYPE
+// CLASS INSTANCES
 
 // Private Class Type Definition
 

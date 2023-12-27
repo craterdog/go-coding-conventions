@@ -92,7 +92,7 @@ func (c *associationClass_[K, V]) FromPair(key K, value V) AssociationLike[K, V]
 	return association
 }
 
-// CLASS TYPE
+// CLASS INSTANCES
 
 // Private Class Type Definition
 

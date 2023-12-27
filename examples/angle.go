@@ -119,7 +119,7 @@ func (c *angleClass_) Difference(first, second AngleLike) AngleLike {
 	return angle
 }
 
-// CLASS TYPE
+// CLASS INSTANCES
 
 // Private Class Type Definition
 
